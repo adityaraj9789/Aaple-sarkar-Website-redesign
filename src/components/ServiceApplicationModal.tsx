@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   Clock,
@@ -40,15 +40,36 @@ export const ServiceApplicationModal: React.FC<ServiceApplicationModalProps> = (
 }) => {
   const [step, setStep] = useState<number>(1);
   const [formData, setFormData] = useState({
-    applicantName: currentUser?.name || 'Aditya Suresh Mhaske',
-    mobile: currentUser?.mobile || '9970123456',
-    aadhaar: currentUser?.aadhaarLast4 ? `XXXX-XXXX-${currentUser.aadhaarLast4}` : 'XXXX-XXXX-7721',
+    applicantName: currentUser?.name || '',
+    mobile: currentUser?.mobile || '',
+    aadhaar: currentUser?.aadhaarLast4 ? `XXXX-XXXX-${currentUser.aadhaarLast4}` : '',
     district: currentUser?.district || 'Pune',
     taluka: 'Haveli',
-    address: 'Flat 402, Shivneri Residency, Kothrud',
-    rationCardNo: 'RC-MH-2019-99410',
-    purpose: 'Higher Education Admission / Scholarship',
+    address: '',
+    rationCardNo: 'RC-MH-2024-99410',
+    purpose: 'Higher Education / Official Documentation',
   });
+
+  useEffect(() => {
+    if (currentUser) {
+      setFormData((prev) => ({
+        ...prev,
+        applicantName: currentUser.name,
+        mobile: currentUser.mobile,
+        aadhaar: `XXXX-XXXX-${currentUser.aadhaarLast4}`,
+        district: currentUser.district,
+        address: prev.address || `${currentUser.district}, Maharashtra`,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        applicantName: prev.applicantName || 'Citizen Applicant',
+        mobile: prev.mobile || '98XXXXXXXX',
+        aadhaar: prev.aadhaar || 'XXXX-XXXX-8821',
+        address: prev.address || 'Pune, Maharashtra',
+      }));
+    }
+  }, [currentUser, isOpen]);
 
   const [uploadedDocs, setUploadedDocs] = useState<Record<string, boolean>>({
     'doc-0': true,

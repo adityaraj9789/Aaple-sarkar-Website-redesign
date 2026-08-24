@@ -24,7 +24,7 @@ import { Language, Department, ServiceItem, CitizenUser, ApplicationRecord, Noti
 
 export default function App() {
   const [language, setLanguage] = useState<Language>('en');
-  const [currentUser, setCurrentUser] = useState<CitizenUser | null>(DEMO_USERS[2]); // Default demo user: Aditya Mhaske
+  const [currentUser, setCurrentUser] = useState<CitizenUser | null>(null); // Starts logged out with "Citizen Login" prompt
   const [applications, setApplications] = useState<ApplicationRecord[]>(DEMO_APPLICATIONS);
   const [notifications, setNotifications] = useState<NotificationItem[]>(DEMO_NOTIFICATIONS);
 
