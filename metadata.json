@@ -1,0 +1,6 @@
+{
+  "name": "Aaple Sarkar",
+  "description": "Maharashtra Right to Public Services Act portal for citizen services, application tracking, certificate verification, and department directories.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
